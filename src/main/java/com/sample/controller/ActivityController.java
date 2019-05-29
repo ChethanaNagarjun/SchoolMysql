@@ -48,7 +48,7 @@ public class ActivityController {
 		GenericResponse genericResponse = new GenericResponse();
 		try {
 			Integer id = activityservice.save(activitydetail);
-			genericResponse.setId(id.toString());
+			genericResponse.setId(id);
 		} catch (Throwable throwable) {
 			throw new Throwable(throwable.getMessage());
 		}
@@ -70,17 +70,15 @@ public class ActivityController {
 	@RequestMapping(value = "/activity/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<GenericResponse> DeleteActivity(@PathVariable("id") Integer id) throws Throwable {
 		GenericResponse<ActivityDetail> genericResponse = new GenericResponse<ActivityDetail>();
-		UUID uuid = UUID.fromString(id);
-        activityservice.delete(Integer);
+        activityservice.delete(id);
 		genericResponse.setMessages("Record deleted successfully");
 		return new ResponseEntity<>(genericResponse, HttpStatus.ACCEPTED);
 	}
 	
 	@RequestMapping(value = "/activity/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<GenericResponse> UpdateActivity(@RequestBody ActivityDetail activityDetail, @PathVariable("id") String id)throws Throwable{
+	public ResponseEntity<GenericResponse> UpdateActivity(@RequestBody ActivityDetail activityDetail, @PathVariable("id") Integer id)throws Throwable{
 		GenericResponse<ActivityDetail> genericResponse = new GenericResponse<ActivityDetail>();
-		UUID uuid = UUID.fromString(id);
-		activityservice.update(uuid, activityDetail.getActivityName());
+		activityservice.update(id, activityDetail.getActivityName());
 		genericResponse.setMessages("Record updated successfully");
 		return new ResponseEntity<>(genericResponse,HttpStatus.ACCEPTED);
 	}
