@@ -49,8 +49,8 @@ public class NonTeachingStaffController {
 			throws Throwable {
 		GenericResponse genericResponse = new GenericResponse();
 		try {
-			UUID id = nonteachingstaffservice.save(nonteachingstaffDetail);
-			genericResponse.setId(id.toString());
+			Integer id = nonteachingstaffservice.save(nonteachingstaffDetail);
+			genericResponse.setId(id);
 		} catch (Throwable throwable) {
 			throw new Throwable(throwable.getMessage());
 		}
@@ -70,21 +70,19 @@ public class NonTeachingStaffController {
 	}
 
 	@RequestMapping(value = "/nonTeachingstaff/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<GenericResponse> DeleteNonTeachingStaff(@PathVariable("id") String id) throws Throwable {
+	public ResponseEntity<GenericResponse> DeleteNonTeachingStaff(@PathVariable("id") Integer id) throws Throwable {
 		GenericResponse<NonTeachingStaffDetail> genericResponse = new GenericResponse<NonTeachingStaffDetail>();
-		UUID uuid = UUID.fromString(id);
-		nonteachingstaffservice.delete(uuid);
+		nonteachingstaffservice.delete(id);
 		genericResponse.setMessages("Record deleted successfully");
 		return new ResponseEntity<>(genericResponse, HttpStatus.ACCEPTED);
 	}
 
 	@RequestMapping(value = "/nonTeachingstaff/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<GenericResponse> UpdateNonTeachingStaff(
-			@RequestBody NonTeachingStaffDetail nonteachingstaffDetail, @PathVariable("id") String id)
+			@RequestBody NonTeachingStaffDetail nonteachingstaffDetail, @PathVariable("id") Integer id)
 			throws Throwable {
 		GenericResponse<NonTeachingStaffDetail> genericResponse = new GenericResponse<NonTeachingStaffDetail>();
-		UUID uuid = UUID.fromString(id);
-		nonteachingstaffservice.update(uuid, nonteachingstaffDetail.getEmailId(),nonteachingstaffDetail.getName());
+		nonteachingstaffservice.update(id, nonteachingstaffDetail.getEmailId(),nonteachingstaffDetail.getName());
 		genericResponse.setMessages("Record updated successfully");
 		return new ResponseEntity<>(genericResponse, HttpStatus.ACCEPTED);
 	}
