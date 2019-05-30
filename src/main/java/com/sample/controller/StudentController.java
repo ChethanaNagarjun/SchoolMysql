@@ -35,7 +35,7 @@ public class StudentController {
 			throws Throwable {
 		String response = null;
 		try {
-			UUID id = studentservice.save(studentdetail);
+		 Integer id = studentservice.save(studentdetail);
 			response = id.toString();
 		} catch (Throwable throwable) {
 			throw new Throwable(throwable.getMessage());
@@ -55,18 +55,16 @@ public class StudentController {
 	}
 	
   @RequestMapping(value ="/student/{id}",method = RequestMethod.DELETE)
-  public ResponseEntity<GenericResponse>DeleteStudent(@PathVariable ("id") String id)throws Throwable{
+  public ResponseEntity<GenericResponse>DeleteStudent(@PathVariable ("id") Integer id)throws Throwable{
 	  GenericResponse<StudentDetail> genericResponse= new GenericResponse<StudentDetail>();
-	  UUID uuid = UUID.fromString(id);
-	  studentservice.delete(uuid);
+	  studentservice.delete(id);
 	  genericResponse.setMessages("Record deleted successfully");
 	  return new ResponseEntity<>(genericResponse,HttpStatus.ACCEPTED);  
   }
   @RequestMapping(value = "/student/{id}",method = RequestMethod.PUT)
-  public ResponseEntity<GenericResponse>UpdateStudent(@RequestBody StudentDetail studentDetail,@PathVariable ("id")String id)throws Throwable{
+  public ResponseEntity<GenericResponse>UpdateStudent(@RequestBody StudentDetail studentDetail,@PathVariable ("id")Integer id)throws Throwable{
 	  GenericResponse<StudentDetail>genericResponse = new GenericResponse<StudentDetail>();
-	  UUID uuid = UUID.fromString(id);
-	  studentservice.update(uuid,studentDetail.getPhoneNo());
+	  studentservice.update(id,studentDetail.getPhoneNo());
 	  genericResponse.setMessages("Record updated successfully");
 	  return new ResponseEntity<>(genericResponse,HttpStatus.ACCEPTED);
   }

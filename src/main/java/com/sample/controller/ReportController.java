@@ -1,8 +1,6 @@
 package com.sample.controller;
 
 import java.util.List;
-import java.util.UUID;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,8 +46,8 @@ public class ReportController {
 			throws Throwable {
 		GenericResponse genericResponse = new GenericResponse();
 		try {
-			UUID id = reportservice.save(reportDetail);
-			genericResponse.setId(id.toString());
+			Integer id = reportservice.save(reportDetail);
+			genericResponse.setId(id);
 		} catch (Throwable throwable) {
 			throw new Throwable(throwable.getMessage());
 		}
@@ -69,19 +67,17 @@ public class ReportController {
 	}
 	
 	@RequestMapping(value ="/report/{id}",method = RequestMethod.DELETE)
-	public ResponseEntity<GenericResponse>DeleteReport(@PathVariable ("id") String id) throws Throwable{
+	public ResponseEntity<GenericResponse>DeleteReport(@PathVariable ("id") Integer id) throws Throwable{
 		GenericResponse<ReportDetail>genericResponse = new GenericResponse<ReportDetail>();
-		UUID uuid = UUID.fromString(id);
-		reportservice.delete(uuid);
+		reportservice.delete(id);
 		genericResponse.setMessages("Record deleted successfully");
 		return new ResponseEntity<>(genericResponse, HttpStatus.ACCEPTED);
 	}
 	
 	@RequestMapping(value = "/report/{id}",method = RequestMethod.PUT)
-	public ResponseEntity<GenericResponse>UpdateReport(@RequestBody ReportDetail reportdetail,@PathVariable("id")String id)throws Throwable{
+	public ResponseEntity<GenericResponse>UpdateReport(@RequestBody ReportDetail reportdetail,@PathVariable("id")Integer id)throws Throwable{
 		GenericResponse<ReportDetail>genericResponse = new GenericResponse<ReportDetail>();
-		UUID uuid = UUID.fromString(id);
-		reportservice.update(uuid,reportdetail.getReportStatus());
+		reportservice.update(id,reportdetail.getReportStatus());
 		genericResponse.setMessages("Record updated successfully");
 		return new ResponseEntity<>(genericResponse,HttpStatus.ACCEPTED);
 	}

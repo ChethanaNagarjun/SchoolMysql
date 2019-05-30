@@ -1,8 +1,6 @@
 package com.sample.controller;
 
 import java.util.List;
-import java.util.UUID;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.sample.modelmapper.GenericResponse;
-import com.sample.modelmapper.ReportDetail;
 import com.sample.modelmapper.StandardDetail;
 import com.sample.service.StandardService;
 
@@ -36,8 +33,8 @@ public class StandardController {
 			throws Throwable {
 		GenericResponse genericResponse = new GenericResponse();
 		try {
-			UUID id = standardservice.save(standardDetail);
-			genericResponse.setId(id.toString());
+			Integer id = standardservice.save(standardDetail);
+			genericResponse.setId(id);
 		} catch (Throwable throwable) {
 			throw new Throwable(throwable.getMessage());
 		}
@@ -56,19 +53,17 @@ public class StandardController {
 	}
 	
 	@RequestMapping(value ="/standard/{id}",method = RequestMethod.DELETE)
-	public ResponseEntity<GenericResponse>DeleteStandard(@PathVariable ("id")String id)throws Throwable {
+	public ResponseEntity<GenericResponse>DeleteStandard(@PathVariable ("id")Integer id)throws Throwable {
 		GenericResponse<StandardDetail>genericResponse = new GenericResponse<StandardDetail>();
-		UUID uuid = UUID.fromString(id);
-		standardservice.delete(uuid);
+		standardservice.delete(id);
 		genericResponse.setMessages("Record deleted successfully");
 		return new ResponseEntity<>(genericResponse,HttpStatus.ACCEPTED);
 		}
 	
 	@RequestMapping(value ="/standard/{id}",method = RequestMethod.PUT)
-	public ResponseEntity<GenericResponse>UpdateStandard(@RequestBody StandardDetail standarddetail,@PathVariable("id")String id)throws Throwable{
+	public ResponseEntity<GenericResponse>UpdateStandard(@RequestBody StandardDetail standarddetail,@PathVariable("id")Integer id)throws Throwable{
 		GenericResponse<StandardDetail>genericResponse = new GenericResponse<StandardDetail>();
-		UUID uuid = UUID.fromString(id);
-		standardservice.update(uuid,standarddetail.getName());
+		standardservice.update(id,standarddetail.getName());
 		genericResponse.setMessages("Record updated successfully");
 		return new ResponseEntity<>(genericResponse,HttpStatus.ACCEPTED);
 	}

@@ -1,8 +1,6 @@
 package com.sample.controller;
 
 import java.util.List;
-import java.util.UUID;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +34,7 @@ public class SubjectController {
 			throws Throwable {
 		String response = null;
 		try {
-			UUID id = subjectservice.save(subjectdetail);
+			Integer id = subjectservice.save(subjectdetail);
 			response = id.toString();
 		} catch (Throwable throwable) {
 			throw new Throwable(throwable.getMessage());
@@ -56,19 +54,17 @@ public class SubjectController {
 	}
 	
 	@RequestMapping(value ="/subject/{id}",method = RequestMethod.DELETE)
-	public ResponseEntity<GenericResponse>DeleteSubject(@PathVariable ("id") String id) throws Throwable{
+	public ResponseEntity<GenericResponse>DeleteSubject(@PathVariable ("id") Integer id) throws Throwable{
 		GenericResponse<SubjectDetail>genericResponse = new GenericResponse<SubjectDetail>();
-		UUID uuid = UUID.fromString(id);
-		subjectservice.delete(uuid);
+		subjectservice.delete(id);
 		genericResponse.setMessages("Record deleted successfully");
 		return new ResponseEntity<>(genericResponse, HttpStatus.ACCEPTED);
 	}
 	
 	@RequestMapping(value = "/subject/{id}",method = RequestMethod.PUT)
-	public ResponseEntity<GenericResponse>UpdateSubject(@RequestBody SubjectDetail subjectdetail,@PathVariable("id")String id)throws Throwable{
+	public ResponseEntity<GenericResponse>UpdateSubject(@RequestBody SubjectDetail subjectdetail,@PathVariable("id")Integer id)throws Throwable{
 		GenericResponse<SubjectDetail>genericResponse = new GenericResponse<SubjectDetail>();
-		UUID uuid = UUID.fromString(id);
-		subjectservice.update(uuid,subjectdetail.getSubjectName());
+		subjectservice.update(id,subjectdetail.getSubjectName());
 		genericResponse.setMessages("Record updated successfully");
 		return new ResponseEntity<>(genericResponse,HttpStatus.ACCEPTED);
 	}
