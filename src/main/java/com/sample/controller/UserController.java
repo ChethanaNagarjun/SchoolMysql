@@ -1,8 +1,6 @@
 package com.sample.controller;
 
 import java.util.List;
-import java.util.UUID;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +45,7 @@ public class UserController {
 	public String addUser(@RequestBody UserDetail userdetail, HttpServletRequest httpServletRequest) throws Throwable {
 		String response = null;
 		try {
-			UUID id = userservice.save(userdetail);
+			Integer id = userservice.save(userdetail);
 			response = id.toString();
 		} catch (Throwable throwable) {
 			throw new Throwable(throwable.getMessage());
@@ -67,19 +65,17 @@ public class UserController {
 	}
 	
 	@RequestMapping(value ="/user/{id}",method = RequestMethod.DELETE)
-	public ResponseEntity<GenericResponse>DeleteUser(@PathVariable ("id") String id) throws Throwable{
+	public ResponseEntity<GenericResponse>DeleteUser(@PathVariable ("id") Integer id) throws Throwable{
 		GenericResponse<UserDetail>genericResponse = new GenericResponse<UserDetail>();
-		UUID uuid = UUID.fromString(id);
-		userservice.delete(uuid);
+		userservice.delete(id);
 		genericResponse.setMessages("Record deleted successfully");
 		return new ResponseEntity<>(genericResponse, HttpStatus.ACCEPTED);
 	}
 	
 	@RequestMapping(value = "/user/{id}",method = RequestMethod.PUT)
-	public ResponseEntity<GenericResponse>UpdateUser(@PathVariable("id")String id)throws Throwable{
+	public ResponseEntity<GenericResponse>UpdateUser(@PathVariable("id")Integer id)throws Throwable{
 		GenericResponse<UserDetail>genericResponse = new GenericResponse<UserDetail>();
-		UUID uuid = UUID.fromString(id);
-		userservice.update(uuid);
+		userservice.update(id);
 		genericResponse.setMessages("Record updated successfully");
 		return new ResponseEntity<>(genericResponse,HttpStatus.ACCEPTED);
 	}

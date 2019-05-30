@@ -1,8 +1,6 @@
 package com.sample.controller;
 
 import java.util.List;
-import java.util.UUID;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.sample.modelmapper.GenericResponse;
-import com.sample.modelmapper.NonTeachingStaffDetail;
 import com.sample.modelmapper.TeachingStaffDetail;
 import com.sample.service.TeachingStaffService;
 
@@ -50,8 +47,8 @@ public class TeachingStaffController {
 			throws Throwable {
 		GenericResponse genericResponse = new GenericResponse();
 		try {
-			UUID id = teachingstaffservice.save(teachingstaffDetail);
-			genericResponse.setId(id.toString());
+			Integer id = teachingstaffservice.save(teachingstaffDetail);
+			genericResponse.setId(id);
 		} catch (Throwable throwable) {
 			throw new Throwable(throwable.getMessage());
 		}
@@ -70,19 +67,17 @@ public class TeachingStaffController {
 	}
 	
 	@RequestMapping(value ="/teachingstaff/{id}",method = RequestMethod.DELETE)
-	public ResponseEntity<GenericResponse>DeleteTeachingstaff(@PathVariable ("id") String id) throws Throwable{
+	public ResponseEntity<GenericResponse>DeleteTeachingstaff(@PathVariable ("id") Integer id) throws Throwable{
 		GenericResponse<TeachingStaffDetail>genericResponse = new GenericResponse<TeachingStaffDetail>();
-		UUID uuid = UUID.fromString(id);
-		teachingstaffservice.delete(uuid);
+		teachingstaffservice.delete(id);
 		genericResponse.setMessages("Record deleted successfully");
 		return new ResponseEntity<>(genericResponse, HttpStatus.ACCEPTED);
 	}
 	
 	@RequestMapping(value = "/teachingstaff/{id}",method = RequestMethod.PUT)
-	public ResponseEntity<GenericResponse>UpdateTeachingstaff(@RequestBody TeachingStaffDetail teachingstaffDetail,@PathVariable("id")String id)throws Throwable{
+	public ResponseEntity<GenericResponse>UpdateTeachingstaff(@RequestBody TeachingStaffDetail teachingstaffDetail,@PathVariable("id")Integer id)throws Throwable{
 		GenericResponse<TeachingStaffDetail>genericResponse = new GenericResponse<TeachingStaffDetail>();
-		UUID uuid = UUID.fromString(id);
-		teachingstaffservice.update(uuid,teachingstaffDetail.getSalary());
+		teachingstaffservice.update(id,teachingstaffDetail.getSalary());
 		genericResponse.setMessages("Record updated successfully");
 		return new ResponseEntity<>(genericResponse,HttpStatus.ACCEPTED);
 	}
