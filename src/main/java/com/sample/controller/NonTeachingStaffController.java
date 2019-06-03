@@ -55,7 +55,7 @@ public class NonTeachingStaffController {
 		return new ResponseEntity<>(genericResponse, HttpStatus.ACCEPTED);
 	}
 
-	@RequestMapping(value = "/nonTeachingstaff", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/nonteachingstaff", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
 	public ResponseEntity<GenericResponse> getAllNonTeachingStaff() throws Throwable {
