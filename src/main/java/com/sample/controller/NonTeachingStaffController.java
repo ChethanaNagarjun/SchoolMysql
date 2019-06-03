@@ -26,7 +26,7 @@ public class NonTeachingStaffController {
 	@Autowired
 	private NonTeachingStaffService nonteachingstaffservice;
 
-	@RequestMapping(value = "/helloNonTeachingStaff", method = RequestMethod.GET, produces = org.springframework.http.MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/hellononteachingstaff", method = RequestMethod.GET, produces = org.springframework.http.MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
 	public String helloNonTeachingStaff() throws Throwable {
@@ -39,7 +39,7 @@ public class NonTeachingStaffController {
 		return response;
 	}
 
-	@RequestMapping(value = "/nonTeachingstaff", method = RequestMethod.POST, produces = org.springframework.http.MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/nonteachingstaff", method = RequestMethod.POST, produces = org.springframework.http.MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
 	public ResponseEntity<GenericResponse> addNonTeachingStaff(
@@ -67,7 +67,7 @@ public class NonTeachingStaffController {
 		return new ResponseEntity<>(genericResponse, HttpStatus.ACCEPTED);
 	}
 
-	@RequestMapping(value = "/nonTeachingstaff/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/nonteachingstaff/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<GenericResponse> DeleteNonTeachingStaff(@PathVariable("id") Integer id) throws Throwable {
 		GenericResponse<NonTeachingStaffDetail> genericResponse = new GenericResponse<NonTeachingStaffDetail>();
 		nonteachingstaffservice.delete(id);
@@ -75,7 +75,7 @@ public class NonTeachingStaffController {
 		return new ResponseEntity<>(genericResponse, HttpStatus.ACCEPTED);
 	}
 
-	@RequestMapping(value = "/nonTeachingstaff/{id}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/nonteachingstaff/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<GenericResponse> UpdateNonTeachingStaff(
 			@RequestBody NonTeachingStaffDetail nonteachingstaffDetail, @PathVariable("id") Integer id)
 			throws Throwable {
