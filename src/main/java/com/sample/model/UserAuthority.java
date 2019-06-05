@@ -14,7 +14,7 @@ import com.sample.model.Authority;
 import com.sample.model.User;
 
 @Entity
-@Table(name = "user_authority")
+@Table(name = "userauthority")
 
 public class UserAuthority implements Serializable {
 	 

@@ -59,10 +59,12 @@ public class TeachingStaffServiceImpl implements TeachingStaffService {
 		
 		if(teachingStaffDetail.getStandardId()!= null) {
 			Standard standard = new Standard();
+			standard.setId(Integer.parseInt(teachingStaffDetail.getStandardId()));
 			teachingStaff.setFkeyTeacherStandardId(standard);
 		}
 		if(teachingStaffDetail.getSubjectId()!= null) {
 			Subject subject = new Subject();
+			subject.setId(Integer.parseInt(teachingStaffDetail.getSubjectId()));
 			teachingStaff.setFkeyTeacherSubjectId(subject);
 			
 		}

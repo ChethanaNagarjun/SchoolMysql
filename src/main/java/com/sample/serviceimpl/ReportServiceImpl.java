@@ -44,6 +44,7 @@ public class ReportServiceImpl implements ReportService {
  
 		if(reportDetail.getStudentId() != null) {
 			Student student = new Student();
+			student.setId(Integer.parseInt(reportDetail.getStudentId()));
 			report.setFkeystudentreport(student);
 		}
 			

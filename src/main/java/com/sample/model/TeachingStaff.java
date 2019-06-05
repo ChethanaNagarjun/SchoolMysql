@@ -26,7 +26,7 @@ public class TeachingStaff {
 	@Column(name = "year_of_join")
 	private Integer yearOfJoin;
 	@Size(max = 10)
-	@Column(name = "educationdetails")
+	@Column(name = "education_details")
 	private String educationDetails;
 	@Size(max = 20)
 	@Column(name = "email_id")

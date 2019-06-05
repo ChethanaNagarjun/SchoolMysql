@@ -77,21 +77,25 @@ public class StudentServiceImpl implements StudentService {
 		
 		if(studentDetail.getReportId()!= null) {
 			Report report = new Report();
+			report.setId(Integer.parseInt(studentDetail.getReportId()));
 			student.setFkeyStudentReportId(report);
 		}
 		
 		if(studentDetail.getNonTeachingStaffId()!= null) {
 			NonTeachingStaff nonteachingstaff = new NonTeachingStaff();
+			nonteachingstaff.setId(Integer.parseInt(studentDetail.getNonTeachingStaffId()));
 			student.setfKeyStudentNonTeachingStaffId(nonteachingstaff);
 		}
 			
 		if(studentDetail.getTeachingStaffId()!= null) {
 			TeachingStaff teachingstaff = new TeachingStaff();
+			teachingstaff.setId(Integer.parseInt(studentDetail.getTeachingStaffId()));
 			student.setFkeyStudentTeachingStaffId(teachingstaff);
 		}
 		
 		if(studentDetail.getStandardId()!= null) {
 			Standard standard = new Standard();
+			standard.setId(Integer.parseInt(studentDetail.getStandardId()));
 			student.setFkeyStudentStandardId(standard);
 		}
 		

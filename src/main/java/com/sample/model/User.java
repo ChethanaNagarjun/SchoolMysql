@@ -43,7 +43,7 @@ public class User {
 	private String resetPasswordKey;
     @ManyToMany
     @JoinTable(
-            name = "user_authority",
+            name = "userauthority",
             joinColumns = @JoinColumn(name = "fkey_user_id"),
             inverseJoinColumns = @JoinColumn(name = "fkey_authority_id"))
     private List<Authority> authorities;

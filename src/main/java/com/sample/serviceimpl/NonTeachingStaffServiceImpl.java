@@ -54,6 +54,7 @@ public class NonTeachingStaffServiceImpl implements NonTeachingStaffService {
 		}
 		if (nonTeachingStaffDetail.getActivityId() != null) {
 			Activity activity = new Activity();
+			activity.setId(Integer.parseInt(nonTeachingStaffDetail.getActivityId()));
 			nonTeachingStaff.setFkeyActivityId(activity);
 			
 		}
